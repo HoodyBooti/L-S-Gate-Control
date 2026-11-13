@@ -13,6 +13,14 @@ Pegasus gates are not supported. On first launch, `sg_config.lua` is created wit
 
 ## Starting the Program
 
+To install or update the program directly from GitHub, run this in the ComputerCraft shell:
+
+```text
+wget run https://raw.githubusercontent.com/HoodyBooti/L-S-Gate-Control/refs/heads/main/install.lua
+```
+
+The installer downloads `sgcontrol.lua` and `sg_language.lua`, then lets you choose the interface language and Stargate/monitor peripherals. Automatic peripheral detection is available for each choice. Existing configuration options are preserved. HTTP must be enabled in the CC:Tweaked server configuration.
+
 In the ComputerCraft shell:
 
 ```text
@@ -152,6 +160,14 @@ For connection or dialing problems:
 Das Programm unterstuetzt keine Pegasus-Gates. Beim ersten Start wird `sg_config.lua` mit allen Standardwerten angelegt. Die Lesezeichen werden in `sg_bookmarks.lua` gespeichert.
 
 ## Starten
+
+Zum Installieren oder Aktualisieren direkt von GitHub diesen Befehl in der ComputerCraft-Shell ausfuehren:
+
+```text
+wget run https://raw.githubusercontent.com/HoodyBooti/L-S-Gate-Control/refs/heads/main/install.lua
+```
+
+Das Installationsprogramm laedt `sgcontrol.lua` und `sg_language.lua` herunter und bietet anschliessend die Auswahl der Oberflaechensprache sowie der Stargate- und Monitor-Peripherals an. Fuer jede Auswahl ist automatische Erkennung moeglich. Andere Konfigurationswerte bleiben erhalten. HTTP muss in der CC:Tweaked-Serverkonfiguration aktiviert sein.
 
 In der ComputerCraft-Shell:
 
