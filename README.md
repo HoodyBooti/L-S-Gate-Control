@@ -19,7 +19,7 @@ To install or update the program directly from GitHub, run this in the ComputerC
 wget run https://raw.githubusercontent.com/HoodyBooti/L-S-Gate-Control/refs/heads/main/install.lua
 ```
 
-The installer downloads `sgcontrol.lua` and `sg_language.lua`, then lets you choose the interface language and Stargate/monitor peripherals. Automatic peripheral detection is available for each choice. Existing configuration options are preserved. HTTP must be enabled in the CC:Tweaked server configuration.
+The installer downloads `sgcontrol.lua` and `sg_language.lua`, then lets you choose the interface language and Stargate peripheral. For each of the three monitor roles, press Enter for automatic discovery or enter the monitor number (for example, `10` becomes `monitor_10`). Existing configuration options are preserved. HTTP must be enabled in the CC:Tweaked server configuration.
 
 In the ComputerCraft shell:
 
@@ -167,7 +167,7 @@ Zum Installieren oder Aktualisieren direkt von GitHub diesen Befehl in der Compu
 wget run https://raw.githubusercontent.com/HoodyBooti/L-S-Gate-Control/refs/heads/main/install.lua
 ```
 
-Das Installationsprogramm laedt `sgcontrol.lua` und `sg_language.lua` herunter und bietet anschliessend die Auswahl der Oberflaechensprache sowie der Stargate- und Monitor-Peripherals an. Fuer jede Auswahl ist automatische Erkennung moeglich. Andere Konfigurationswerte bleiben erhalten. HTTP muss in der CC:Tweaked-Serverkonfiguration aktiviert sein.
+Das Installationsprogramm laedt `sgcontrol.lua` und `sg_language.lua` herunter und bietet anschliessend die Auswahl der Oberflaechensprache und des Stargate-Peripherals an. Fuer jede der drei Monitor-Rollen kann Enter fuer die automatische Erkennung gedrueckt oder eine Monitor-Nummer eingegeben werden (zum Beispiel wird `10` zu `monitor_10`). Andere Konfigurationswerte bleiben erhalten. HTTP muss in der CC:Tweaked-Serverkonfiguration aktiviert sein.
 
 In der ComputerCraft-Shell:
 

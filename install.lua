@@ -88,6 +88,27 @@ local function showOptions(names)
   end
 end
 
+local function chooseMonitor(role, used)
+  while true do
+    write(role .. " monitor number (Enter = automatic): ")
+    local value = read()
+    if value == "" or value:lower() == "auto" then
+      return ""
+    end
+
+    if value:match("^%d+$") then
+      local name = "monitor_" .. tonumber(value)
+      if not used[name] then
+        used[name] = true
+        return name
+      end
+      print("That monitor is already assigned to another role.")
+    else
+      print("Enter a non-negative monitor number, or press Enter for automatic discovery.")
+    end
+  end
+end
+
 print("Lantea Stargate Control installer")
 print("Downloading the latest program files...")
 
@@ -115,22 +136,12 @@ showOptions(gates)
 local gateChoice = choose("Stargate", gates, 0, true)
 config.gate = gateChoice == 0 and "" or gates[gateChoice]
 
-local monitors = getPeripherals("monitor")
 print("")
-print("Monitor peripherals (0 = automatic assignment):")
-showOptions(monitors)
+print("For each monitor role, enter its number (for example 10 for monitor_10),")
+print("or press Enter for automatic discovery.")
 local usedMonitors = {}
 for _, role in ipairs({ "control", "status", "chevron" }) do
-  while true do
-    local choice = choose(role .. " monitor", monitors, 0, true)
-    local name = choice == 0 and "" or monitors[choice]
-    if name == "" or not usedMonitors[name] then
-      config[role .. "Monitor"] = name
-      if name ~= "" then usedMonitors[name] = true end
-      break
-    end
-    print("That monitor is already assigned to another role.")
-  end
+  config[role .. "Monitor"] = chooseMonitor(role, usedMonitors)
 end
 
 local configTemp = CONFIG_FILE .. ".install-tmp"
