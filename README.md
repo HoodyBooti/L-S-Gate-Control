@@ -40,11 +40,11 @@ If you start the program under a different name, use that name with the argument
 
 The program assigns connected monitors to the `control`, `status`, and `chevron` roles in sorted name order. Each monitor can have only one role. You can assign peripheral names explicitly in `sg_config.lua`; an empty name (`""`) means automatic selection.
 
-| Role | Contents |
-| --- | --- |
-| `controlMonitor` | Touch DHD, separate bookmark menu, iris and dialing controls |
-| `statusMonitor` | Connection status, address, elapsed time, energy, iris, and event log |
-| `chevronMonitor` | Stargate ring with chevron progress and an animated wormhole |
+| Role | Contents | |
+| --- | --- | --- |
+| `controlMonitor` | Touch DHD, separate bookmark menu, iris and dialing controls |<img width="714" height="462" alt="DIAL" src="https://github.com/user-attachments/assets/11726bce-8698-490b-af7f-e610b0164226" /> <img width="714" height="462" alt="BOOKMARKS" src="https://github.com/user-attachments/assets/f296959d-b666-4a44-ae56-caa1b4c6ae4a" /> |
+| `statusMonitor` | Connection status, address, elapsed time, energy, iris, and event log | <img width="462" height="462" alt="STATUS" src="https://github.com/user-attachments/assets/1738666a-6f28-4f30-b6d3-8746a25dde98" /> |
+| `chevronMonitor` | Stargate ring with chevron progress and an animated wormhole | <img width="714" height="462" alt="CHEVRON" src="https://github.com/user-attachments/assets/1ec1eed8-9d13-40fa-b3ce-d8420e9f7a10" /> | 
 
 If only one monitor is connected, it displays the dialing menu. To assign monitors explicitly, first run `<programname> identify`, then enter the names in the configuration.
 
@@ -180,11 +180,11 @@ Wenn das Programm unter einem anderen Namen gestartet wird, diesen Namen auch fu
 
 Das Programm weist angeschlossene Monitore in sortierter Namensreihenfolge den Rollen `control`, `status` und `chevron` zu. Ein Monitor kann jeweils nur eine Rolle uebernehmen. In `sg_config.lua` lassen sich die Peripheral-Namen fest zuweisen; ein leerer Name (`""`) bedeutet automatische Auswahl.
 
-| Rolle | Inhalt |
-| --- | --- |
-| `controlMonitor` | Touch-DHD, separates Lesezeichenmenue, Iris- und Wahlsteuerung |
-| `statusMonitor` | Verbindungszustand, Adresse, Laufzeit, Energie, Iris und Ereignisprotokoll |
-| `chevronMonitor` | Stargate-Ring mit Chevron-Fortschritt und animiertem Wurmloch |
+| Rolle | Inhalt | |
+| --- | --- | --- |
+| `controlMonitor` | Touch-DHD, separates Lesezeichenmenue, Iris- und Wahlsteuerung | <img width="714" height="462" alt="DIAL" src="https://github.com/user-attachments/assets/11726bce-8698-490b-af7f-e610b0164226" /> <img width="714" height="462" alt="BOOKMARKS" src="https://github.com/user-attachments/assets/f296959d-b666-4a44-ae56-caa1b4c6ae4a" /> |
+| `statusMonitor` | Verbindungszustand, Adresse, Laufzeit, Energie, Iris und Ereignisprotokoll | <img width="462" height="462" alt="STATUS" src="https://github.com/user-attachments/assets/1738666a-6f28-4f30-b6d3-8746a25dde98" /> |
+| `chevronMonitor` | Stargate-Ring mit Chevron-Fortschritt und animiertem Wurmloch | <img width="714" height="462" alt="CHEVRON" src="https://github.com/user-attachments/assets/1ec1eed8-9d13-40fa-b3ce-d8420e9f7a10" /> | 
 
 Falls nur ein Monitor angeschlossen ist, zeigt er das Wahlmenue. Fuer eine feste Zuordnung zuerst `<programmname> identify` ausfuehren und danach die Namen in der Konfiguration eintragen.
 
