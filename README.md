@@ -2,6 +2,8 @@
 
 `sgcontrol.lua` is a touch control program for Lantea Stargates with CC:Tweaked. It provides a DHD for dialing addresses and can display gate status, iris state, and chevron progress.
 
+This project is designed for [Lantea: Stargates](https://www.lantea.site/), also available on [CurseForge](https://www.curseforge.com/minecraft/mc-mods/lantea-stargates).
+
 ## Requirements
 
 - Minecraft with CC:Tweaked and Lantea; the program is designed for Lantea 0.7.7.0.
@@ -149,6 +151,8 @@ For connection or dialing problems:
 # Lantea Stargate-Steuerung
 
 `sgcontrol.lua` ist ein Touch-Steuerprogramm fuer Stargates aus Lantea mit CC:Tweaked. Es stellt ein DHD zur Adresswahl bereit und kann Gate-Status, Iris und Chevron-Wahl anzeigen.
+
+Dieses Projekt wurde fuer [Lantea: Stargates](https://www.lantea.site/) entwickelt; die Mod ist auch auf [CurseForge](https://www.curseforge.com/minecraft/mc-mods/lantea-stargates) verfuegbar.
 
 ## Voraussetzungen
 
