@@ -16,9 +16,9 @@
 
 ## Deutsch
 
-| Wahlmenue | Lesezeichen | Status |
+| Wahlmenü | Lesezeichen | Status |
 | --- | --- | --- |
-| ![Deutsches Wahlmenue](./DE_dial.png) | ![Deutsche Lesezeichen](./DE_dial_bookmarks.png) | ![Deutsche Statusanzeige](./DE_status.png) |
+| ![Deutsches Wahlmenü](./DE_dial.png) | ![Deutsche Lesezeichen](./DE_dial_bookmarks.png) | ![Deutsche Statusanzeige](./DE_status.png) |
 
 | Chevron-Anzeige |
 | --- |

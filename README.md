@@ -11,7 +11,7 @@ This project is designed for [Lantea: Stargates](https://www.lantea.site/), also
 - At least one connected monitor for the dialing menu. Status and chevron monitors are optional.
 - The files `sgcontrol.lua` and `sg_language.lua` must be in the same ComputerCraft filesystem.
 
-Pegasus gates are not supported. On first launch, `sg_config.lua` is created with all default values. Bookmarks are saved in `sg_bookmarks.lua`.
+Pegasus gates are not supported. On first launch, `sg_config.lua` is created with all default valüs. Bookmarks are saved in `sg_bookmarks.lua`.
 
 ## Starting the Program
 
@@ -41,7 +41,7 @@ sgcontrol probe
 
 - `identify` displays peripheral names on all monitors for 15 seconds.
 - `debug` enables verbose diagnostic messages for that run.
-- `probe` also queries various gate methods and writes the results to `sg_debug.log`.
+- `probe` also qüries various gate methods and writes the results to `sg_debug.log`.
 - Press `Ctrl+T` to stop the program.
 
 If you start the program under a different name, use that name with the arguments as well.
@@ -52,9 +52,9 @@ The program assigns connected monitors to the `control`, `status`, and `chevron`
 
 | Role | Contents | |
 | --- | --- | --- |
-| `controlMonitor` | Touch DHD, separate bookmark menu, iris and dialing controls |<img width="714" height="462" alt="DIAL" src="https://github.com/user-attachments/assets/11726bce-8698-490b-af7f-e610b0164226" /> <img width="714" height="462" alt="BOOKMARKS" src="https://github.com/user-attachments/assets/f296959d-b666-4a44-ae56-caa1b4c6ae4a" /> |
-| `statusMonitor` | Connection status, address, elapsed time, energy, iris, and event log | <img width="462" height="462" alt="STATUS" src="https://github.com/user-attachments/assets/1738666a-6f28-4f30-b6d3-8746a25dde98" /> |
-| `chevronMonitor` | Stargate ring with chevron progress and an animated wormhole | <img width="714" height="462" alt="CHEVRON" src="https://github.com/user-attachments/assets/1ec1eed8-9d13-40fa-b3ce-d8420e9f7a10" /> | 
+| `controlMonitor` | Touch DHD, separate bookmark menu, iris and dialing controls | ![English dialing screen](pictures/EN_dial.png) ![English authorization screen](pictures/EN_dial_authorization.png) ![English bookmarks](pictures/EN_dial_bookmarks-full.png) |
+| `statusMonitor` | Connection status, address, elapsed time, energy, iris, and event log | ![English status screen](pictures/EN_status.png) |
+| `chevronMonitor` | Stargate ring with chevron progress and an animated wormhole | ![Animated English chevron display](pictures/EN_chevron_in-dial.gif) | 
 
 For more screenshots in English and German, see the [picture gallery](pictures/readme.md).
 
@@ -91,7 +91,7 @@ del <No.>
 
 ## Configuration
 
-`sg_config.lua` is created automatically and updated with any missing entries at each startup. You can edit the values there. Find monitor names with the `identify` command.
+`sg_config.lua` is created automatically and updated with any missing entries at each startup. You can edit the valüs there. Find monitor names with the `identify` command.
 
 | Option | Default | Description |
 | --- | --- | --- |
@@ -99,15 +99,15 @@ del <No.>
 | `controlMonitor` | `""` | Monitor for the dialing menu. If empty, one is selected automatically. |
 | `statusMonitor` | `""` | Monitor for status information. If empty, one is selected automatically if a monitor is available. |
 | `chevronMonitor` | `""` | Monitor for the chevron display. If empty, one is selected automatically if a monitor is available. |
-| `autoScale` | `true` | Selects the largest suitable text scale and a matching DHD grid. |
+| `autoScale` | `trü` | Selects the largest suitable text scale and a matching DHD grid. |
 | `controlScale` | `1` | Text scale for the dialing menu when `autoScale = false`. |
 | `textScale` | `0.5` | Text scale for the status monitor. |
 | `chevronScale` | `0.5` | Text scale for the chevron monitor. |
-| `showNames` | `true` | Shows symbol names when the layout has room. |
+| `showNames` | `trü` | Shows symbol names when the layout has room. |
 | `minNameLen` | `6` | Minimum name length used by the adaptive layout. |
 | `maxNameLen` | `12` | Maximum length of symbol names on the DHD. |
 | `useGlyphs` | `false` | Uses available glyph images instead of numbers when the layout allows it. |
-| `palmRequired` | `true` | Requires hand-scan authorization before every dial. |
+| `palmRequired` | `trü` | Requires hand-scan authorization before every dial. |
 | `palmMode` | `"hold"` | `"hold"` requires continuous contact; `"taps"` uses several quick touches. |
 | `palmHoldSeconds` | `2.5` | Hold duration for `palmMode = "hold"`. |
 | `palmTaps` | `5` | Number of touches for `palmMode = "taps"`. |
@@ -117,7 +117,7 @@ del <No.>
 | `symbolTimeout` | `60` | Maximum time to wait for each symbol while dialing, in seconds. |
 | `language` | `"DE"` | Interface language: `"DE"` or `"EN"`. |
 | `debug` | `false` | Enables diagnostic output by default. |
-| `debugTerminal` | `true` | Also prints diagnostic messages in the terminal. |
+| `debugTerminal` | `trü` | Also prints diagnostic messages in the terminal. |
 | `sidebar` | `false` | Deprecated option; bookmarks are always shown in a separate menu. |
 
 Monitor roles can be assigned like this:
@@ -131,13 +131,13 @@ Monitor roles can be assigned like this:
 }
 ```
 
-The file is saved by `textutils.serialise`. It is best to edit existing values only and not replace the file with an arbitrary Lua configuration file.
+The file is saved by `textutils.serialise`. It is best to edit existing valüs only and not replace the file with an arbitrary Lua configuration file.
 
 ## Languages
 
 Language strings are stored in the `language.EN` and `language.DE` tables in `sg_language.lua`. Select the language with the `language` setting in `sg_config.lua`. To add a language, copy one of the table blocks, for example as `language.FR`, and translate the required text keys. Missing translations fall back to English.
 
-Gate symbol names and technical values provided by the gate come from the Stargate peripheral and are not translated through the language file.
+Gate symbol names and technical valüs provided by the gate come from the Stargate peripheral and are not translated through the language file.
 
 ## Troubleshooting
 
@@ -146,34 +146,34 @@ For connection or dialing problems:
 1. Check monitor names with `<programname> identify`.
 2. If needed, set the gate peripheral explicitly with `gate`.
 3. Start with `<programname> debug` and inspect `sg_debug.log`.
-4. Run `<programname> probe` to log available gate queries and their return values.
+4. Run `<programname> probe` to log available gate qüries and their return valüs.
 
 ---
 
 # Lantea: Stargates Gate Control
 
-`sgcontrol.lua` ist ein Touch-Steuerprogramm fuer Stargates aus Lantea mit CC:Tweaked. Es stellt ein DHD zur Adresswahl bereit und kann Gate-Status, Iris und Chevron-Wahl anzeigen.
+`sgcontrol.lua` ist ein Touch-Steuerprogramm für Stargates aus Lantea mit CC:Tweaked. Es stellt ein DHD zur Adresswahl bereit und kann Gate-Status, Iris und Chevron-Wahl anzeigen.
 
-Dieses Projekt wurde fuer [Lantea: Stargates](https://www.lantea.site/) entwickelt; die Mod ist auch auf [CurseForge](https://www.curseforge.com/minecraft/mc-mods/lantea-stargates) verfuegbar.
+Dieses Projekt wurde für [Lantea: Stargates](https://www.lantea.site/) entwickelt; die Mod ist auch auf [CurseForge](https://www.curseforge.com/minecraft/mc-mods/lantea-stargates) verfügbar.
 
 ## Voraussetzungen
 
-- Minecraft mit CC:Tweaked und Lantea; das Programm ist fuer Lantea 0.7.7.0 ausgelegt.
-- Ein Computer mit Verbindung zum Stargate-Peripheral. Der Computer kann direkt am Controller (Coupler Kit erforderlich) oder ueber ein Wired Modem angeschlossen sein.
-- Mindestens ein angeschlossener Monitor fuer das Wahlmenue. Status- und Chevron-Monitore sind optional.
-- Die Dateien `sgcontrol.lua` und `sg_language.lua` muessen im selben ComputerCraft-Dateisystem liegen.
+- Minecraft mit CC:Tweaked und Lantea; das Programm ist für Lantea 0.7.7.0 ausgelegt.
+- Ein Computer mit Verbindung zum Stargate-Peripheral. Der Computer kann direkt am Controller (Coupler Kit erforderlich) oder über ein Wired Modem angeschlossen sein.
+- Mindestens ein angeschlossener Monitor für das Wahlmenü. Status- und Chevron-Monitore sind optional.
+- Die Dateien `sgcontrol.lua` und `sg_language.lua` müssen im selben ComputerCraft-Dateisystem liegen.
 
-Das Programm unterstuetzt keine Pegasus-Gates. Beim ersten Start wird `sg_config.lua` mit allen Standardwerten angelegt. Die Lesezeichen werden in `sg_bookmarks.lua` gespeichert.
+Das Programm unterstützt keine Pegasus-Gates. Beim ersten Start wird `sg_config.lua` mit allen Standardwerten angelegt. Die Lesezeichen werden in `sg_bookmarks.lua` gespeichert.
 
 ## Starten
 
-Zum Installieren oder Aktualisieren direkt von GitHub diesen Befehl in der ComputerCraft-Shell ausfuehren:
+Zum Installieren oder Aktualisieren direkt von GitHub diesen Befehl in der ComputerCraft-Shell ausführen:
 
 ```text
 wget run https://raw.githubusercontent.com/HoodyBooti/L-S-Gate-Control/refs/heads/main/install.lua
 ```
 
-Das Installationsprogramm laedt `sgcontrol.lua` und `sg_language.lua` herunter und bietet anschliessend die Auswahl der Oberflaechensprache und des Stargate-Peripherals an. Fuer jede der drei Monitor-Rollen kann Enter fuer die automatische Erkennung gedrueckt oder eine Monitor-Nummer eingegeben werden (zum Beispiel wird `10` zu `monitor_10`). Andere Konfigurationswerte bleiben erhalten. HTTP muss in der CC:Tweaked-Serverkonfiguration aktiviert sein.
+Das Installationsprogramm lädt `sgcontrol.lua` und `sg_language.lua` herunter und bietet anschliessend die Auswahl der Oberflächensprache und des Stargate-Peripherals an. Für jede der drei Monitor-Rollen kann Enter für die automatische Erkennung gedrückt oder eine Monitor-Nummer eingegeben werden (zum Beispiel wird `10` zu `monitor_10`). Andere Konfigurationswerte bleiben erhalten. HTTP muss in der CC:Tweaked-Serverkonfiguration aktiviert sein.
 
 In der ComputerCraft-Shell:
 
@@ -183,7 +183,7 @@ sgcontrol
 
 ComputerCraft kann Lua-Programme normalerweise ohne `.lua`-Endung starten. Alternativ kann die Datei in `sgcontrol.lua` umbenannt werden; dann lautet der Startbefehl `sgcontrol`.
 
-Nuetzliche Argumente:
+Nützliche Argumente:
 
 ```text
 sgcontrol identify
@@ -191,47 +191,47 @@ sgcontrol debug
 sgcontrol probe
 ```
 
-- `identify` zeigt die Peripheral-Namen auf allen Monitoren fuer 15 Sekunden an.
-- `debug` schaltet fuer diesen Start ausfuehrliche Diagnosemeldungen ein.
-- `probe` fragt zusaetzlich verschiedene Gate-Methoden ab und schreibt die Ergebnisse in `sg_debug.log`.
-- Zum Beenden `Strg+T` druecken.
+- `identify` zeigt die Peripheral-Namen auf allen Monitoren für 15 Sekunden an.
+- `debug` schaltet für diesen Start ausführliche Diagnosemeldungen ein.
+- `probe` fragt zusätzlich verschiedene Gate-Methoden ab und schreibt die Ergebnisse in `sg_debug.log`.
+- Zum Beenden `Strg+T` drücken.
 
-Wenn das Programm unter einem anderen Namen gestartet wird, diesen Namen auch fuer die Argumente verwenden.
+Wenn das Programm unter einem anderen Namen gestartet wird, diesen Namen auch für die Argumente verwenden.
 
 ## Monitore
 
-Das Programm weist angeschlossene Monitore in sortierter Namensreihenfolge den Rollen `control`, `status` und `chevron` zu. Ein Monitor kann jeweils nur eine Rolle uebernehmen. In `sg_config.lua` lassen sich die Peripheral-Namen fest zuweisen; ein leerer Name (`""`) bedeutet automatische Auswahl.
+Das Programm weist angeschlossene Monitore in sortierter Namensreihenfolge den Rollen `control`, `status` und `chevron` zu. Ein Monitor kann jeweils nur eine Rolle übernehmen. In `sg_config.lua` lassen sich die Peripheral-Namen fest zuweisen; ein leerer Name (`""`) bedeutet automatische Auswahl.
 
 | Rolle | Inhalt | |
 | --- | --- | --- |
-| `controlMonitor` | Touch-DHD, separates Lesezeichenmenue, Iris- und Wahlsteuerung | <img width="714" height="462" alt="DIAL" src="https://github.com/user-attachments/assets/11726bce-8698-490b-af7f-e610b0164226" /> <img width="714" height="462" alt="BOOKMARKS" src="https://github.com/user-attachments/assets/f296959d-b666-4a44-ae56-caa1b4c6ae4a" /> |
-| `statusMonitor` | Verbindungszustand, Adresse, Laufzeit, Energie, Iris und Ereignisprotokoll | <img width="462" height="462" alt="STATUS" src="https://github.com/user-attachments/assets/1738666a-6f28-4f30-b6d3-8746a25dde98" /> |
-| `chevronMonitor` | Stargate-Ring mit Chevron-Fortschritt und animiertem Wurmloch | <img width="714" height="462" alt="CHEVRON" src="https://github.com/user-attachments/assets/1ec1eed8-9d13-40fa-b3ce-d8420e9f7a10" /> | 
+| `controlMonitor` | Touch-DHD, separates Lesezeichenmenü, Iris- und Wahlsteürung | ![Wahlmonitor](pictures/DE_dial.png) ![Wahlmonitor](pictures/DE_dial.png) |
+| `statusMonitor` | Verbindungszustand, Adresse, Laufzeit, Energie, Iris und Ereignisprotokoll | ![Statusbildschirm](pictures/DE_status.png) |
+| `chevronMonitor` | Stargate-Ring mit Chevron-Fortschritt und animiertem Wurmloch | ![Chevronbildschirm](pictures/DE_chevron.png) | 
 
-Falls nur ein Monitor angeschlossen ist, zeigt er das Wahlmenue. Fuer eine feste Zuordnung zuerst `<programmname> identify` ausfuehren und danach die Namen in der Konfiguration eintragen.
+Falls nur ein Monitor angeschlossen ist, zeigt er das Wahlmenü. Für eine feste Zuordnung zürst `<programmname> identify` ausführen und danach die Namen in der Konfiguration eintragen.
 
 ## Bedienung
 
-### Wahlmenue
+### Wahlmenü
 
-- Ein Symbol antippen, um es zur Adresse hinzuzufuegen. Ausgewaehlte Symbole werden gelb markiert.
+- Ein Symbol antippen, um es zur Adresse hinzuzufügen. Ausgewählte Symbole werden gelb markiert.
 - `WAHL` (`DIAL` auf Englisch) startet die Wahl. `STOP` bricht eine Wahl ab oder schliesst eine ausgehende Verbindung.
 - `ZUR.` (`BACK`) entfernt das letzte Symbol; `CLR` (`CLEAR`) leert die Adresse.
-- `IRIS` oeffnet oder schliesst die Iris, falls das Gate eine Iris besitzt.
-- `BOOK`, `LZ` oder `BM` oeffnet das separate Lesezeichenmenue (je nach Sprache und Monitorbreite).
-- Eine Adresse besteht aus 6 bis 8 Symbolen. Der Point of Origin (`00`) wird automatisch angehaengt.
+- `IRIS` öffnet oder schliesst die Iris, falls das Gate eine Iris besitzt.
+- `BOOK`, `LZ` oder `BM` öffnet das separate Lesezeichenmenü (je nach Sprache und Monitorbreite).
+- Eine Adresse besteht aus 6 bis 8 Symbolen. Der Point of Origin (`00`) wird automatisch angehängt.
 
-Ist der Handscan aktiviert, muss vor dem Waehlen die Hand auf dem Monitor gehalten oder mehrfach angetippt werden. Die Art der Freigabe laesst sich konfigurieren.
+Ist der Handscan aktiviert, muss vor dem Wählen die Hand auf dem Monitor gehalten oder mehrfach angetippt werden. Die Art der Freigabe lässt sich konfigurieren.
 
 ### Lesezeichen
 
-- Eine Adresse mit mindestens 6 Symbolen kann ueber `SAVE` gespeichert werden.
-- Ein gespeicherter Eintrag laedt die Adresse durch Antippen.
-- `X` loescht einen Eintrag; zur Bestaetigung denselben Knopf erneut antippen.
-- Bei vielen Eintraegen blaettern `<` und `>` durch die Seiten.
-- Neue Lesezeichen erhalten automatisch einen Namen. Namen lassen sich auch im ComputerCraft-Terminal aendern.
+- Eine Adresse mit mindestens 6 Symbolen kann über `SAVE` gespeichert werden.
+- Ein gespeicherter Eintrag lädt die Adresse durch Antippen.
+- `X` löscht einen Eintrag; zur Bestätigung denselben Knopf erneut antippen.
+- Bei vielen Einträgen blättern `<` und `>` durch die Seiten.
+- Neü Lesezeichen erhalten automatisch einen Namen. Namen lassen sich auch im ComputerCraft-Terminal ändern.
 
-Terminalbefehle waehrend das Programm laeuft:
+Terminalbefehle während das Programm läuft:
 
 ```text
 list
@@ -241,34 +241,34 @@ del <Nr>
 
 ## Konfiguration
 
-`sg_config.lua` wird automatisch erzeugt und bei jedem Start um fehlende Eintraege ergaenzt. Werte koennen dort angepasst werden. Monitor-Namen findest du mit dem `identify`-Befehl.
+`sg_config.lua` wird automatisch erzeugt und bei jedem Start um fehlende Einträge ergänzt. Werte können dort angepasst werden. Monitor-Namen findest du mit dem `identify`-Befehl.
 
 | Option | Standard | Bedeutung |
 | --- | --- | --- |
 | `gate` | `""` | Stargate-Peripheral. Leer sucht automatisch nach einem Stargate. |
-| `controlMonitor` | `""` | Monitor fuer das Wahlmenue. Leer waehlt automatisch. |
-| `statusMonitor` | `""` | Monitor fuer Statusinformationen. Leer waehlt automatisch, sofern noch ein Monitor frei ist. |
-| `chevronMonitor` | `""` | Monitor fuer die Chevron-Grafik. Leer waehlt automatisch, sofern noch ein Monitor frei ist. |
-| `autoScale` | `true` | Waehlt die groesste passende Textskalierung und ein passendes DHD-Raster. |
-| `controlScale` | `1` | Textskalierung fuer das Wahlmenue, wenn `autoScale = false` ist. |
+| `controlMonitor` | `""` | Monitor für das Wahlmenü. Leer wählt automatisch. |
+| `statusMonitor` | `""` | Monitor für Statusinformationen. Leer wählt automatisch, sofern noch ein Monitor frei ist. |
+| `chevronMonitor` | `""` | Monitor für die Chevron-Grafik. Leer wählt automatisch, sofern noch ein Monitor frei ist. |
+| `autoScale` | `trü` | Wählt die grösste passende Textskalierung und ein passendes DHD-Raster. |
+| `controlScale` | `1` | Textskalierung für das Wahlmenü, wenn `autoScale = false` ist. |
 | `textScale` | `0.5` | Textskalierung des Statusmonitors. |
 | `chevronScale` | `0.5` | Textskalierung des Chevron-Monitors. |
-| `showNames` | `true` | Zeigt Symbolnamen an, wenn das Layout Platz bietet. |
-| `minNameLen` | `6` | Kuerzeste Namenslaenge, die das adaptive Layout verwendet. |
-| `maxNameLen` | `12` | Maximale Laenge von Symbolnamen im DHD. |
-| `useGlyphs` | `false` | Verwendet verfuegbare Glyphenbilder statt Nummern, wenn das Layout passt. |
-| `palmRequired` | `true` | Verlangt vor jeder Wahl eine Freigabe per Handscan. |
+| `showNames` | `trü` | Zeigt Symbolnamen an, wenn das Layout Platz bietet. |
+| `minNameLen` | `6` | Kürzeste Namenslänge, die das adaptive Layout verwendet. |
+| `maxNameLen` | `12` | Maximale Länge von Symbolnamen im DHD. |
+| `useGlyphs` | `false` | Verwendet verfügbare Glyphenbilder statt Nummern, wenn das Layout passt. |
+| `palmRequired` | `trü` | Verlangt vor jeder Wahl eine Freigabe per Handscan. |
 | `palmMode` | `"hold"` | `"hold"` verlangt kontinuierliches Halten; `"taps"` nutzt mehrere schnelle Touches. |
-| `palmHoldSeconds` | `2.5` | Haltedauer fuer `palmMode = "hold"`. |
-| `palmTaps` | `5` | Anzahl der Touches fuer `palmMode = "taps"`. |
+| `palmHoldSeconds` | `2.5` | Haltedaür für `palmMode = "hold"`. |
+| `palmTaps` | `5` | Anzahl der Touches für `palmMode = "taps"`. |
 | `palmGap` | `0.8` | Maximale Pause zwischen Touches, bevor der Scan neu beginnt. |
 | `palmTimeout` | `30` | Zeit in Sekunden, nach der sich die Freigabeansicht schliesst. |
 | `pollInterval` | `0.25` | Abstand zwischen Gate-Abfragen in Sekunden. |
-| `symbolTimeout` | `60` | Maximale Wartezeit pro Symbol beim Waehlen in Sekunden. |
-| `language` | `"DE"` | Sprache der Oberflaeche: `"DE"` oder `"EN"`. |
-| `debug` | `false` | Aktiviert Diagnoseausgaben dauerhaft. |
-| `debugTerminal` | `true` | Gibt Diagnosemeldungen zusaetzlich im Terminal aus. |
-| `sidebar` | `false` | Veraltete Option; Lesezeichen erscheinen immer nur im separaten Menue. |
+| `symbolTimeout` | `60` | Maximale Wartezeit pro Symbol beim Wählen in Sekunden. |
+| `language` | `"DE"` | Sprache der Oberfläche: `"DE"` oder `"EN"`. |
+| `debug` | `false` | Aktiviert Diagnoseausgaben daürhaft. |
+| `debugTerminal` | `trü` | Gibt Diagnosemeldungen zusätzlich im Terminal aus. |
+| `sidebar` | `false` | Veraltete Option; Lesezeichen erscheinen immer nur im separaten Menü. |
 
 Monitor-Rollen lassen sich zum Beispiel so festlegen:
 
@@ -285,16 +285,16 @@ Die Datei wird von `textutils.serialise` gespeichert. Daher am besten nur besteh
 
 ## Sprachen
 
-Die Sprachtexte liegen in `sg_language.lua` in den Tabellen `language.EN` und `language.DE`. Die Sprache wird ueber `language` in `sg_config.lua` ausgewaehlt. Um eine Sprache hinzuzufuegen, einen der Tabellenbloecke kopieren, etwa als `language.FR`, und die benoetigten Textschluessel uebersetzen. Nicht uebersetzte Eintraege fallen auf Englisch zurueck.
+Die Sprachtexte liegen in `sg_language.lua` in den Tabellen `language.EN` und `language.DE`. Die Sprache wird über `language` in `sg_config.lua` ausgewählt. Um eine Sprache hinzuzufügen, einen der Tabellenblöcke kopieren, etwa als `language.FR`, und die benötigten Textschlüssel übersetzen. Nicht übersetzte Einträge fallen auf Englisch zurück.
 
-Gate-Symbolnamen und vom Gate gelieferte technische Werte stammen aus dem Stargate-Peripheral und werden nicht aus der Sprachdatei uebersetzt.
+Gate-Symbolnamen und vom Gate gelieferte technische Werte stammen aus dem Stargate-Peripheral und werden nicht aus der Sprachdatei übersetzt.
 
 ## Diagnose
 
 Bei Verbindungs- oder Wahlproblemen:
 
-1. Mit `<programmname> identify` Monitor-Namen pruefen.
-2. Bei Bedarf Gate-Peripheral ueber `gate` fest eintragen.
+1. Mit `<programmname> identify` Monitor-Namen prüfen.
+2. Bei Bedarf Gate-Peripheral über `gate` fest eintragen.
 3. Mit `<programmname> debug` starten und `sg_debug.log` ansehen.
-4. Mit `<programmname> probe` verfuegbare Gate-Abfragen und Rueckgaben protokollieren.
+4. Mit `<programmname> probe` verfügbare Gate-Abfragen und Rückgaben protokollieren.
 
