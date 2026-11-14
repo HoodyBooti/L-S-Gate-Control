@@ -1,4 +1,4 @@
-# Lantea Stargate Control
+# Lantea: Stargates Gate Control
 
 `sgcontrol.lua` is a touch control program for Lantea Stargates with CC:Tweaked. It provides a DHD for dialing addresses and can display gate status, iris state, and chevron progress.
 
@@ -150,7 +150,7 @@ For connection or dialing problems:
 
 ---
 
-# Lantea Stargate-Steuerung
+# Lantea: Stargates Gate Control
 
 `sgcontrol.lua` ist ein Touch-Steuerprogramm fuer Stargates aus Lantea mit CC:Tweaked. Es stellt ein DHD zur Adresswahl bereit und kann Gate-Status, Iris und Chevron-Wahl anzeigen.
 
