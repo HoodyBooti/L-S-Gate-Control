@@ -56,6 +56,8 @@ The program assigns connected monitors to the `control`, `status`, and `chevron`
 | `statusMonitor` | Connection status, address, elapsed time, energy, iris, and event log | <img width="462" height="462" alt="STATUS" src="https://github.com/user-attachments/assets/1738666a-6f28-4f30-b6d3-8746a25dde98" /> |
 | `chevronMonitor` | Stargate ring with chevron progress and an animated wormhole | <img width="714" height="462" alt="CHEVRON" src="https://github.com/user-attachments/assets/1ec1eed8-9d13-40fa-b3ce-d8420e9f7a10" /> | 
 
+For more screenshots in English and German, see the [picture gallery](pictures/readme.md).
+
 If only one monitor is connected, it displays the dialing menu. To assign monitors explicitly, first run `<programname> identify`, then enter the names in the configuration.
 
 ## Controls
