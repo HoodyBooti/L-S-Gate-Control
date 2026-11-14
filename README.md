@@ -11,7 +11,7 @@ This project is designed for [Lantea: Stargates](https://www.lantea.site/), also
 - At least one connected monitor for the dialing menu. Status and chevron monitors are optional.
 - The files `sgcontrol.lua` and `sg_language.lua` must be in the same ComputerCraft filesystem.
 
-Pegasus gates are not supported. On first launch, `sg_config.lua` is created with all default valüs. Bookmarks are saved in `sg_bookmarks.lua`.
+Pegasus gates are not supported. On first launch, `sg_config.lua` is created with all default values. Bookmarks are saved in `sg_bookmarks.lua`.
 
 ## Starting the Program
 
@@ -41,7 +41,7 @@ sgcontrol probe
 
 - `identify` displays peripheral names on all monitors for 15 seconds.
 - `debug` enables verbose diagnostic messages for that run.
-- `probe` also qüries various gate methods and writes the results to `sg_debug.log`.
+- `probe` also queries various gate methods and writes the results to `sg_debug.log`.
 - Press `Ctrl+T` to stop the program.
 
 If you start the program under a different name, use that name with the arguments as well.
@@ -91,7 +91,7 @@ del <No.>
 
 ## Configuration
 
-`sg_config.lua` is created automatically and updated with any missing entries at each startup. You can edit the valüs there. Find monitor names with the `identify` command.
+`sg_config.lua` is created automatically and updated with any missing entries at each startup. You can edit the values there. Find monitor names with the `identify` command.
 
 | Option | Default | Description |
 | --- | --- | --- |
@@ -99,15 +99,15 @@ del <No.>
 | `controlMonitor` | `""` | Monitor for the dialing menu. If empty, one is selected automatically. |
 | `statusMonitor` | `""` | Monitor for status information. If empty, one is selected automatically if a monitor is available. |
 | `chevronMonitor` | `""` | Monitor for the chevron display. If empty, one is selected automatically if a monitor is available. |
-| `autoScale` | `trü` | Selects the largest suitable text scale and a matching DHD grid. |
+| `autoScale` | `true` | Selects the largest suitable text scale and a matching DHD grid. |
 | `controlScale` | `1` | Text scale for the dialing menu when `autoScale = false`. |
 | `textScale` | `0.5` | Text scale for the status monitor. |
 | `chevronScale` | `0.5` | Text scale for the chevron monitor. |
-| `showNames` | `trü` | Shows symbol names when the layout has room. |
+| `showNames` | `true` | Shows symbol names when the layout has room. |
 | `minNameLen` | `6` | Minimum name length used by the adaptive layout. |
 | `maxNameLen` | `12` | Maximum length of symbol names on the DHD. |
 | `useGlyphs` | `false` | Uses available glyph images instead of numbers when the layout allows it. |
-| `palmRequired` | `trü` | Requires hand-scan authorization before every dial. |
+| `palmRequired` | `true` | Requires hand-scan authorization before every dial. |
 | `palmMode` | `"hold"` | `"hold"` requires continuous contact; `"taps"` uses several quick touches. |
 | `palmHoldSeconds` | `2.5` | Hold duration for `palmMode = "hold"`. |
 | `palmTaps` | `5` | Number of touches for `palmMode = "taps"`. |
@@ -117,7 +117,7 @@ del <No.>
 | `symbolTimeout` | `60` | Maximum time to wait for each symbol while dialing, in seconds. |
 | `language` | `"DE"` | Interface language: `"DE"` or `"EN"`. |
 | `debug` | `false` | Enables diagnostic output by default. |
-| `debugTerminal` | `trü` | Also prints diagnostic messages in the terminal. |
+| `debugTerminal` | `true` | Also prints diagnostic messages in the terminal. |
 | `sidebar` | `false` | Deprecated option; bookmarks are always shown in a separate menu. |
 
 Monitor roles can be assigned like this:
@@ -131,13 +131,13 @@ Monitor roles can be assigned like this:
 }
 ```
 
-The file is saved by `textutils.serialise`. It is best to edit existing valüs only and not replace the file with an arbitrary Lua configuration file.
+The file is saved by `textutils.serialise`. It is best to edit existing values only and not replace the file with an arbitrary Lua configuration file.
 
 ## Languages
 
 Language strings are stored in the `language.EN` and `language.DE` tables in `sg_language.lua`. Select the language with the `language` setting in `sg_config.lua`. To add a language, copy one of the table blocks, for example as `language.FR`, and translate the required text keys. Missing translations fall back to English.
 
-Gate symbol names and technical valüs provided by the gate come from the Stargate peripheral and are not translated through the language file.
+Gate symbol names and technical values provided by the gate come from the Stargate peripheral and are not translated through the language file.
 
 ## Troubleshooting
 
@@ -146,7 +146,7 @@ For connection or dialing problems:
 1. Check monitor names with `<programname> identify`.
 2. If needed, set the gate peripheral explicitly with `gate`.
 3. Start with `<programname> debug` and inspect `sg_debug.log`.
-4. Run `<programname> probe` to log available gate qüries and their return valüs.
+4. Run `<programname> probe` to log available gate queries and their return values.
 
 ---
 
