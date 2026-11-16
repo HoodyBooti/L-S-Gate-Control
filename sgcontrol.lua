@@ -1438,6 +1438,10 @@ local chevPrio = {
   [colors.red] = 6, [colors.lightBlue] = 5, [colors.cyan] = 4,
   [colors.brown] = 3, [colors.gray] = 2, [colors.blue] = 2, [colors.black] = 0,
 }
+local chevCellColors = {
+  colors.black, colors.blue, colors.lightBlue, colors.cyan,
+  colors.red, colors.brown, colors.gray,
+}
 
 local chevFrame, chevBin = 0, ""
 
@@ -1528,6 +1532,7 @@ local function drawChevronsRaw()
   end
 
   -- Pixel -> Teletext-Zeichen
+  local cellPixels, colorCount = {}, {}
   for row = 1, ch do
     local t, f, b = {}, {}, {}
     local y0 = (row - 1) * 3
@@ -1535,16 +1540,41 @@ local function drawChevronsRaw()
       local i1 = y0 * PW + (col - 1) * 2 + 1
       local i3 = i1 + PW
       local i5 = i3 + PW
-      local bg = cv[i5 + 1]
+      cellPixels[1], cellPixels[2] = cv[i1], cv[i1 + 1]
+      cellPixels[3], cellPixels[4] = cv[i3], cv[i3 + 1]
+      cellPixels[5], cellPixels[6] = cv[i5], cv[i5 + 1]
+      -- Use the dominant color as background so edge cells do not invert empty pixels.
+      for _, color in ipairs(chevCellColors) do colorCount[color] = 0 end
+      for bit = 1, 6 do
+        local color = cellPixels[bit]
+        colorCount[color] = colorCount[color] + 1
+      end
+
+      local bg, bgCount, bgPrio = colors.black, -1, math.huge
+      for _, color in ipairs(chevCellColors) do
+        local count, priority = colorCount[color], chevPrio[color]
+        if count > bgCount or (count == bgCount and priority < bgPrio) then
+          bg, bgCount, bgPrio = color, count, priority
+        end
+      end
+
       local code, fg, fp = 0, bg, -1
-      local p = cv[i1];     if p ~= bg then code = code + 1;  if (chevPrio[p] or 1) > fp then fg, fp = p, chevPrio[p] or 1 end end
-      p = cv[i1 + 1];       if p ~= bg then code = code + 2;  if (chevPrio[p] or 1) > fp then fg, fp = p, chevPrio[p] or 1 end end
-      p = cv[i3];           if p ~= bg then code = code + 4;  if (chevPrio[p] or 1) > fp then fg, fp = p, chevPrio[p] or 1 end end
-      p = cv[i3 + 1];       if p ~= bg then code = code + 8;  if (chevPrio[p] or 1) > fp then fg, fp = p, chevPrio[p] or 1 end end
-      p = cv[i5];           if p ~= bg then code = code + 16; if (chevPrio[p] or 1) > fp then fg, fp = p, chevPrio[p] or 1 end end
+      for bit = 1, 5 do
+        local p = cellPixels[bit]
+        if p ~= bg then
+          code = code + 2 ^ (bit - 1)
+          if (chevPrio[p] or 1) > fp then fg, fp = p, chevPrio[p] or 1 end
+        end
+      end
+      local outFg, outBg = fg, bg
+      if cellPixels[6] ~= bg then
+        -- The 2x3 glyph's bottom-right pixel is fixed to the background.
+        code = 31 - code
+        outFg, outBg = bg, fg
+      end
       t[col] = string.char(128 + code)
-      f[col] = hx(fg)
-      b[col] = hx(bg)
+      f[col] = hx(outFg)
+      b[col] = hx(outBg)
     end
     m.setCursorPos(1, row)
     m.blit(table.concat(t), table.concat(f), table.concat(b))
