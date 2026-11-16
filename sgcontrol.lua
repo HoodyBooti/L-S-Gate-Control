@@ -1356,10 +1356,9 @@ local function chevGeometry(PW, PH, P, ox, oy)
 
   local verticalInset = math.min(4, math.floor(P * 0.04))
   local R = P / 2 - verticalInset
-  local xScale = 0.94
   local cx = ox + (P - 1) / 2
   local cy = oy + (P - 1) / 2 - verticalInset
-  -- Match the preferred preview and compensate for the monitor's rendered pixel aspect.
+  -- Match the slightly shorter, upward-set ring in the preferred preview.
   local bandOut = R - 0.5
   local ringWidth = math.max(2, math.floor(R * 0.22 + 0.5))
   local bandIn = bandOut - ringWidth
@@ -1377,7 +1376,7 @@ local function chevGeometry(PW, PH, P, ox, oy)
 
   for y = oy, oy + P - 1 do
     for x = ox, ox + P - 1 do
-      local dx, dy = (x - cx) / xScale, y - cy
+      local dx, dy = x - cx, y - cy
       local d = math.sqrt(dx * dx + dy * dy)
       local idx = y * PW + x + 1
       if d <= bandOut and d >= bandIn then
@@ -1395,11 +1394,9 @@ local function chevGeometry(PW, PH, P, ox, oy)
 
   for i = 1, 9 do
     local a = math.rad(CHEV_ANGLE[i])
-    local px, py = cx + math.sin(a) * bandOut * xScale, cy - math.cos(a) * bandOut
-    local rx, ry = math.sin(a) / xScale, -math.cos(a)
-    local normal = math.sqrt(rx * rx + ry * ry)
-    rx, ry = rx / normal, ry / normal
-    local tx, ty = -ry, rx
+    local rx, ry = math.sin(a), -math.cos(a)
+    local tx, ty = math.cos(a), math.sin(a)
+    local px, py = cx + rx * bandOut, cy + ry * bandOut
     local body = {}
     local ext = th + tw + 1
     for y = math.floor(py - ext), math.ceil(py + ext) do
