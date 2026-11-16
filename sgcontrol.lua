@@ -1310,7 +1310,6 @@ local function chevSlot(k, total)
   if k >= total or k >= 9 then return 9 end
   return k
 end
-local atan2 = math.atan2 or function(y, x) return math.atan(y, x) end
 
 local DIGITS = {
   ["0"] = { "111", "101", "101", "101", "111" },
@@ -1361,9 +1360,6 @@ local function chevGeometry(PW, PH, P, ox)
   local tw = math.max(2, math.floor(th * 0.75 + 0.5))        -- halbe Breite
   local bandOut = R - th - 0.5
   local bandIn = bandOut - math.max(2, math.floor(R * 0.22 + 0.5))
-  local midR = (bandOut + bandIn) / 2
-  local nTicks = math.max(8, math.floor(360 * math.max(1, midR) / (57.3 * 12)))
-  local tickDeg = 360 / nTicks
 
   local base = {}
   for i = 1, PW * PH do base[i] = colors.black end
@@ -1378,14 +1374,7 @@ local function chevGeometry(PW, PH, P, ox)
       local d = math.sqrt(dx * dx + dy * dy)
       local idx = y * PW + x + 1
       if d <= bandOut and d >= bandIn then
-        local c = colors.blue
-        if d >= bandOut - 1.2 or d <= bandIn + 1.2 then
-          c = colors.lightBlue
-        else
-          local a = math.deg(atan2(dx, -dy)) % 360
-          if (a % tickDeg) < 1.4 * 57.3 / d then c = colors.black end
-        end
-        base[idx] = c
+        base[idx] = (d >= bandOut - 1.2 or d <= bandIn + 1.2) and colors.lightBlue or colors.blue
       elseif d < bandIn - 0.5 then
         g.ix[#g.ix + 1], g.iy[#g.iy + 1], g.id[#g.id + 1] = x, y, d
       end
@@ -1407,20 +1396,18 @@ local function chevGeometry(PW, PH, P, ox)
           local u = dx * tx + dy * ty      -- seitlich
           if v >= 0 and v <= th then
             local t = v / th
-            local bodyHalf = tw * (0.92 - 0.66 * t)
-            local faceHalf = tw * (0.62 - 0.45 * t)
+            local bodyHalf = tw * (1 - t) + 0.4
+            local faceHalf = tw * 0.62 * (1 - t)
             local idx = y * PW + x + 1
             if math.abs(u) <= bodyHalf + 0.5 then
               body[#body + 1] = idx
               if v >= 1 and v <= th - 1 and math.abs(u) <= faceHalf + 0.35 then
                 face[#face + 1] = idx
               end
-            end
 
-            local markStart, markEnd = th * 0.25, th * 0.72
-            if v >= markStart and v <= markEnd then
-              local markHalf = tw * 0.42 * (1 - (v - markStart) / (markEnd - markStart))
-              if math.abs(math.abs(u) - markHalf) <= 0.55 then
+              local markV = th * 0.55
+              if v >= 1 and v <= th - 1 and math.abs(v - markV) <= 0.55 and
+                math.abs(u) <= faceHalf + 0.35 then
                 mark[#mark + 1] = idx
               end
             end
