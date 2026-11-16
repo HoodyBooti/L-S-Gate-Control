@@ -43,6 +43,7 @@ local defaults = {
   palmTimeout    = 30,   -- Sekunden bis die Freigabe-Ansicht von selbst schliesst
   pollInterval   = 0.25,
   symbolTimeout  = 60,   -- Sekunden Wartezeit pro Symbol
+  energyInFE     = false, -- Energieanzeige in FE statt EU (1 EU = 4 FE)
   debug          = false, -- true = Debug-Ausgabe (oder: sgcontrol debug)
   debugTerminal  = true,  -- Debug-Zeilen auch im Terminal anzeigen
   language       = "DE", -- Sprache der Monitoroberflaeche: DE oder EN
@@ -1255,7 +1256,13 @@ local function drawStatus()
   line(T("LABEL_TIME"), elapsed())
   line(T("LABEL_CHEVRONS"), S.lockedCount .. "/9")
   if not compact then
-    line(T("LABEL_ENERGY"), S.energy and (num(S.energy) .. " EU") or "?")
+    local energy = "?"
+    if S.energy ~= nil then
+      energy = cfg.energyInFE == true
+        and (num((tonumber(S.energy) or 0) * 4) .. " FE")
+        or (num(S.energy) .. " EU")
+    end
+    line(T("LABEL_ENERGY"), energy)
   end
   local iris = irisText(S.iris)
   if S.material and not compact then iris = iris .. " (" .. tostring(S.material) .. ")" end

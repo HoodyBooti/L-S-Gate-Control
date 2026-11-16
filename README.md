@@ -21,7 +21,7 @@ To install or update the program directly from GitHub, run this in the ComputerC
 wget run https://raw.githubusercontent.com/HoodyBooti/L-S-Gate-Control/refs/heads/main/install.lua
 ```
 
-The installer downloads `sgcontrol.lua` and `sg_language.lua`, then lets you choose the interface language and Stargate peripheral. For each of the three monitor roles, press Enter for automatic discovery or enter the monitor number (for example, `10` becomes `monitor_10`). Existing configuration options are preserved. HTTP must be enabled in the CC:Tweaked server configuration.
+The installer downloads `sgcontrol.lua` and `sg_language.lua`, then lets you choose the interface language, energy unit, and Stargate peripheral. The energy display can use EU or FE (1 EU = 4 FE). For each of the three monitor roles, press Enter for automatic discovery or enter the monitor number (for example, `10` becomes `monitor_10`). Existing configuration options are preserved. HTTP must be enabled in the CC:Tweaked server configuration.
 
 In the ComputerCraft shell:
 
@@ -116,6 +116,7 @@ del <No.>
 | `pollInterval` | `0.25` | Interval between gate polls, in seconds. |
 | `symbolTimeout` | `60` | Maximum time to wait for each symbol while dialing, in seconds. |
 | `language` | `"DE"` | Interface language: `"DE"` or `"EN"`. |
+| `energyInFE` | `false` | Displays energy in FE instead of EU. The conversion is 1 EU = 4 FE. |
 | `debug` | `false` | Enables diagnostic output by default. |
 | `debugTerminal` | `true` | Also prints diagnostic messages in the terminal. |
 | `sidebar` | `false` | Deprecated option; bookmarks are always shown in a separate menu. |
@@ -173,7 +174,7 @@ Zum Installieren oder Aktualisieren direkt von GitHub diesen Befehl in der Compu
 wget run https://raw.githubusercontent.com/HoodyBooti/L-S-Gate-Control/refs/heads/main/install.lua
 ```
 
-Das Installationsprogramm lädt `sgcontrol.lua` und `sg_language.lua` herunter und bietet anschliessend die Auswahl der Oberflächensprache und des Stargate-Peripherals an. Für jede der drei Monitor-Rollen kann Enter für die automatische Erkennung gedrückt oder eine Monitor-Nummer eingegeben werden (zum Beispiel wird `10` zu `monitor_10`). Andere Konfigurationswerte bleiben erhalten. HTTP muss in der CC:Tweaked-Serverkonfiguration aktiviert sein.
+Das Installationsprogramm lädt `sgcontrol.lua` und `sg_language.lua` herunter und bietet anschliessend die Auswahl der Oberflächensprache, Energieeinheit und des Stargate-Peripherals an. Die Energieanzeige kann EU oder FE verwenden (1 EU = 4 FE). Für jede der drei Monitor-Rollen kann Enter für die automatische Erkennung gedrückt oder eine Monitor-Nummer eingegeben werden (zum Beispiel wird `10` zu `monitor_10`). Andere Konfigurationswerte bleiben erhalten. HTTP muss in der CC:Tweaked-Serverkonfiguration aktiviert sein.
 
 In der ComputerCraft-Shell:
 
@@ -266,6 +267,7 @@ del <Nr>
 | `pollInterval` | `0.25` | Abstand zwischen Gate-Abfragen in Sekunden. |
 | `symbolTimeout` | `60` | Maximale Wartezeit pro Symbol beim Wählen in Sekunden. |
 | `language` | `"DE"` | Sprache der Oberfläche: `"DE"` oder `"EN"`. |
+| `energyInFE` | `false` | Zeigt die Energie statt in EU in FE an. Umrechnung: 1 EU = 4 FE. |
 | `debug` | `false` | Aktiviert Diagnoseausgaben daürhaft. |
 | `debugTerminal` | `trü` | Gibt Diagnosemeldungen zusätzlich im Terminal aus. |
 | `sidebar` | `false` | Veraltete Option; Lesezeichen erscheinen immer nur im separaten Menü. |

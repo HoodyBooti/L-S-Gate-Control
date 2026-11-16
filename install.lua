@@ -129,6 +129,11 @@ print("")
 print("Choose interface language: 1 = English, 2 = Deutsch")
 config.language = choose("Language", { "EN", "DE" }, languageDefault, false) == 1 and "EN" or "DE"
 
+local energyUnitDefault = config.energyInFE == true and 2 or 1
+print("")
+print("Choose energy unit: 1 = EU, 2 = FE (1 EU = 4 FE)")
+config.energyInFE = choose("Energy unit", { "EU", "FE" }, energyUnitDefault, false) == 2
+
 local gates = getPeripherals("stargate")
 print("")
 print("Stargate peripherals (0 = automatic detection):")
