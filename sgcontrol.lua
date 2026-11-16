@@ -1534,7 +1534,6 @@ local function drawChevronsRaw()
   end
 
   -- Pixel -> Teletext-Zeichen
-  local pixels, counts = {}, {}
   for row = 1, ch do
     local t, f, b = {}, {}, {}
     local y0 = (row - 1) * 3
@@ -1542,42 +1541,16 @@ local function drawChevronsRaw()
       local i1 = y0 * PW + (col - 1) * 2 + 1
       local i3 = i1 + PW
       local i5 = i3 + PW
-      pixels[1], pixels[2], pixels[3] = cv[i1], cv[i1 + 1], cv[i3]
-      pixels[4], pixels[5], pixels[6] = cv[i3 + 1], cv[i5], cv[i5 + 1]
-      for _, pixel in ipairs(pixels) do counts[pixel] = (counts[pixel] or 0) + 1 end
-
-      local bg, bgCount, bgPriority
-      local fg, fgCount, fgPriority
-      for color, count in pairs(counts) do
-        local priority = chevPrio[color] or 1
-        if not bg or count > bgCount or
-          (count == bgCount and (priority < bgPriority or (priority == bgPriority and color < bg))) then
-          bg, bgCount, bgPriority = color, count, priority
-        end
-      end
-      for color, count in pairs(counts) do
-        if color ~= bg then
-          local priority = chevPrio[color] or 1
-          if not fg or count > fgCount or
-            (count == fgCount and (priority > fgPriority or (priority == fgPriority and color < fg))) then
-            fg, fgCount, fgPriority = color, count, priority
-          end
-        end
-      end
-      fg = fg or bg
-
-      local code, bit = 0, 1
-      for i = 1, 6 do
-        local pixel = pixels[i]
-        if pixel == fg or (pixel ~= bg and (chevPrio[pixel] or 1) > bgPriority) then
-          code = code + bit
-        end
-        bit = bit * 2
-      end
+      local bg = cv[i5 + 1]
+      local code, fg, fp = 0, bg, -1
+      local p = cv[i1];     if p ~= bg then code = code + 1;  if (chevPrio[p] or 1) > fp then fg, fp = p, chevPrio[p] or 1 end end
+      p = cv[i1 + 1];       if p ~= bg then code = code + 2;  if (chevPrio[p] or 1) > fp then fg, fp = p, chevPrio[p] or 1 end end
+      p = cv[i3];           if p ~= bg then code = code + 4;  if (chevPrio[p] or 1) > fp then fg, fp = p, chevPrio[p] or 1 end end
+      p = cv[i3 + 1];       if p ~= bg then code = code + 8;  if (chevPrio[p] or 1) > fp then fg, fp = p, chevPrio[p] or 1 end end
+      p = cv[i5];           if p ~= bg then code = code + 16; if (chevPrio[p] or 1) > fp then fg, fp = p, chevPrio[p] or 1 end end
       t[col] = string.char(128 + code)
       f[col] = hx(fg)
       b[col] = hx(bg)
-      for color in pairs(counts) do counts[color] = nil end
     end
     m.setCursorPos(1, row)
     m.blit(table.concat(t), table.concat(f), table.concat(b))
