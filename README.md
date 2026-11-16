@@ -18,7 +18,7 @@ Pegasus gates are not supported. On first launch, `sg_config.lua` is created wit
 To install or update the program directly from GitHub, run this in the ComputerCraft shell:
 
 ```text
-wget run https://raw.githubusercontent.com/HoodyBooti/L-S-Gate-Control/refs/heads/main/install.lua
+wget run https://github.com/HoodyBooti/L-S-Gate-Control/releases/download/3.0/install.lua
 ```
 
 The installer downloads `sgcontrol.lua` and `sg_language.lua`, then lets you choose the interface language, energy unit, and Stargate peripheral. The energy display can use EU or FE (1 EU = 4 FE). For each of the three monitor roles, press Enter for automatic discovery or enter the monitor number (for example, `10` becomes `monitor_10`). Existing configuration options are preserved. HTTP must be enabled in the CC:Tweaked server configuration.
@@ -171,7 +171,7 @@ Das Programm unterstützt keine Pegasus-Gates. Beim ersten Start wird `sg_config
 Zum Installieren oder Aktualisieren direkt von GitHub diesen Befehl in der ComputerCraft-Shell ausführen:
 
 ```text
-wget run https://raw.githubusercontent.com/HoodyBooti/L-S-Gate-Control/refs/heads/main/install.lua
+wget run https://github.com/HoodyBooti/L-S-Gate-Control/releases/download/3.0/install.lua
 ```
 
 Das Installationsprogramm lädt `sgcontrol.lua` und `sg_language.lua` herunter und bietet anschliessend die Auswahl der Oberflächensprache, Energieeinheit und des Stargate-Peripherals an. Die Energieanzeige kann EU oder FE verwenden (1 EU = 4 FE). Für jede der drei Monitor-Rollen kann Enter für die automatische Erkennung gedrückt oder eine Monitor-Nummer eingegeben werden (zum Beispiel wird `10` zu `monitor_10`). Andere Konfigurationswerte bleiben erhalten. HTTP muss in der CC:Tweaked-Serverkonfiguration aktiviert sein.
