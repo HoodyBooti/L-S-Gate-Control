@@ -1473,8 +1473,7 @@ local function drawChevronsRaw()
   end
   for i = 1, 9 do
     local c = slotColor[i]
-    local color = c == colors.gray and colors.blue or c
-    for _, idx in ipairs(g.chev[i]) do cv[idx] = color end
+    for _, idx in ipairs(g.chev[i]) do cv[idx] = c end
   end
 
   if S.wormhole then
