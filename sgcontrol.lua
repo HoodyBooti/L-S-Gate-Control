@@ -1349,13 +1349,13 @@ local function resetChevPalette(m)
 end
 
 local chevGeo = {}
-local function chevGeometry(PW, PH, P, ox)
-  local key = PW .. "x" .. PH .. ":" .. P .. ":" .. ox
+local function chevGeometry(PW, PH, P, ox, oy)
+  local key = PW .. "x" .. PH .. ":" .. P .. ":" .. ox .. ":" .. oy
   local g = chevGeo[key]
   if g then return g end
 
   local R = P / 2
-  local cx, cy = ox + (P - 1) / 2, (P - 1) / 2
+  local cx, cy = ox + (P - 1) / 2, oy + (P - 1) / 2
   local th = math.max(3, math.floor(R * 0.17 + 0.5))        -- Hoehe eines Chevrons
   local tw = math.max(2, math.floor(th * 0.75 + 0.5))        -- halbe Breite
   local bandOut = R - 0.5
@@ -1370,7 +1370,7 @@ local function chevGeometry(PW, PH, P, ox)
     chev = {}, chevMask = chevMask, outerRim = outerRim, ix = {}, iy = {}, id = {},
   }
 
-  for y = 0, P - 1 do
+  for y = oy, oy + P - 1 do
     for x = ox, ox + P - 1 do
       local dx, dy = x - cx, y - cy
       local d = math.sqrt(dx * dx + dy * dy)
@@ -1444,9 +1444,12 @@ local function drawChevronsRaw()
   local PW, PH = cw * 2, ch * 3
   local wide = PW >= PH * 1.5
   local reserve = wide and 0 or ((ch >= 14) and 2 or 1)
-  local P = wide and math.min(PH, PW) or math.min(PW, (ch - reserve) * 3)
-  local ox = wide and 0 or math.floor((PW - P) / 2)
-  local g = chevGeometry(PW, PH, P, ox)
+  local margin = 2
+  local fit = wide and math.min(PH, PW) or math.min(PW, (ch - reserve) * 3)
+  local P = math.max(1, fit - 2 * margin)
+  local ox = wide and margin or math.floor((PW - P) / 2)
+  local oy = margin
+  local g = chevGeometry(PW, PH, P, ox, oy)
 
   local syms = S.target and S.target.syms
   local total = syms and #syms or math.max(7, S.lockedCount)
@@ -1561,7 +1564,7 @@ local function drawChevronsRaw()
     ctr(ch, ("%s %d/%d"):format(stateShort[S.state] or "?", math.min(lit, total), total), info[2])
     if reserve == 2 then ctr(ch - 1, tname, colors.yellow) end
   else
-    local x0 = math.ceil(P / 2) + 2
+    local x0 = math.ceil(g.cx) + 2
     local avail = cw - x0 + 1
     if avail >= 8 then
       local compact = ch < 14
