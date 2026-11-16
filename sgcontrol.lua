@@ -1357,11 +1357,11 @@ local function chevGeometry(PW, PH, P, ox, oy)
   local R = P / 2
   local cx, cy = ox + (P - 1) / 2, oy + (P - 1) / 2
   local bandOut = R - 0.5
-  local ringWidth = math.max(2, math.floor(R * 0.22 + 0.5))
+  local th = math.max(6, math.floor(R * 0.15 + 0.5))       -- Hoehe eines Chevrons
+  local ringWidth = math.max(2, math.floor(R * 0.28 + 0.5), th + 6)
   local bandIn = bandOut - ringWidth
-  local chevInset = math.min(4, math.max(1, math.floor((ringWidth - 3) / 2)))
-  local th = math.max(3, ringWidth - 2 * chevInset)        -- Hoehe eines Chevrons
-  local tw = math.max(2, math.floor(th * 0.75 + 0.5))      -- halbe Breite
+  local chevInset = math.max(1, math.floor((ringWidth - th) / 2))
+  local tw = math.max(5, math.floor(th * 0.75 + 0.5))      -- halbe Breite
 
   local base = {}
   local outerRim = {}
@@ -1430,7 +1430,7 @@ local function hx(c)
 end
 
 local chevPrio = {
-  [colors.red] = 5, [colors.cyan] = 4, [colors.lightBlue] = 4,
+  [colors.red] = 6, [colors.lightBlue] = 5, [colors.cyan] = 4,
   [colors.brown] = 3, [colors.gray] = 2, [colors.blue] = 2, [colors.black] = 0,
 }
 
