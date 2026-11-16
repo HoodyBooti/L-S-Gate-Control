@@ -1355,13 +1355,16 @@ local function chevGeometry(PW, PH, P, ox, oy)
   if g then return g end
 
   local R = P / 2
-  local cx, cy = ox + (P - 1) / 2, oy + (P - 1) / 2
+  -- Match the slightly shorter, upward-set ring in the preferred preview.
+  local verticalInset = math.min(4, math.floor(P * 0.04))
+  local yScale = (P - 2 * verticalInset) / P
+  local cx = ox + (P - 1) / 2
+  local cy = oy + (P - 1) / 2 - verticalInset
   local bandOut = R - 0.5
-  local th = math.max(6, math.floor(R * 0.15 + 0.5))       -- Hoehe eines Chevrons
-  local ringWidth = math.max(2, math.floor(R * 0.28 + 0.5), th + 6)
+  local ringWidth = math.max(2, math.floor(R * 0.22 + 0.5))
   local bandIn = bandOut - ringWidth
-  local chevInset = math.max(1, math.floor((ringWidth - th) / 2))
-  local tw = math.max(5, math.floor(th * 0.75 + 0.5))      -- halbe Breite
+  local th = math.max(3, math.floor(R * 0.18 + 0.5))        -- Hoehe eines Chevrons
+  local tw = math.max(2, math.floor(th * 0.75 + 0.5))       -- halbe Breite
 
   local base = {}
   local outerRim = {}
@@ -1374,7 +1377,7 @@ local function chevGeometry(PW, PH, P, ox, oy)
 
   for y = oy, oy + P - 1 do
     for x = ox, ox + P - 1 do
-      local dx, dy = x - cx, y - cy
+      local dx, dy = x - cx, (y - cy) / yScale
       local d = math.sqrt(dx * dx + dy * dy)
       local idx = y * PW + x + 1
       if d <= bandOut and d >= bandIn then
@@ -1392,9 +1395,11 @@ local function chevGeometry(PW, PH, P, ox, oy)
 
   for i = 1, 9 do
     local a = math.rad(CHEV_ANGLE[i])
-    local rx, ry = math.sin(a), -math.cos(a)
-    local tx, ty = math.cos(a), math.sin(a)
-    local px, py = cx + rx * (bandOut - chevInset), cy + ry * (bandOut - chevInset)
+    local px, py = cx + math.sin(a) * bandOut, cy - math.cos(a) * bandOut * yScale
+    local rx, ry = math.sin(a), -math.cos(a) / yScale
+    local normal = math.sqrt(rx * rx + ry * ry)
+    rx, ry = rx / normal, ry / normal
+    local tx, ty = -ry, rx
     local body = {}
     local ext = th + tw + 1
     for y = math.floor(py - ext), math.ceil(py + ext) do
