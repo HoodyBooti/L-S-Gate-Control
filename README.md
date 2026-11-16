@@ -18,10 +18,23 @@ Pegasus gates are not supported. On first launch, `sg_config.lua` is created wit
 To install or update the program directly from GitHub, run this in the ComputerCraft shell:
 
 ```text
-wget run https://github.com/HoodyBooti/L-S-Gate-Control/releases/download/3.0/install.lua
+wget run https://raw.githubusercontent.com/HoodyBooti/L-S-Gate-Control/refs/heads/main/install.lua
 ```
 
-The installer downloads `sgcontrol.lua` and `sg_language.lua`, then lets you choose the interface language, energy unit, and Stargate peripheral. The energy display can use EU or FE (1 EU = 4 FE). For each of the three monitor roles, press Enter for automatic discovery or enter the monitor number (for example, `10` becomes `monitor_10`). Existing configuration options are preserved. HTTP must be enabled in the CC:Tweaked server configuration.
+### Choosing the Program Version
+
+The installer is always downloaded from the repository's `main` branch; it is a common bootstrap, not a version-specific installer. When it starts, choose the program source: the latest GitHub release is selected by default, or enter a specific release tag or a branch name (for example, `main` or `dev`). Release choices download the files attached to that GitHub release; branch choices download the live files from that branch. This selection determines which versions of `sgcontrol.lua` and `sg_language.lua` are installed.
+
+### Installer Configuration
+
+After selecting the program source, the installer lets you configure this computer:
+
+- Choose the interface language.
+- Choose whether energy is displayed in EU or FE (1 EU = 4 FE).
+- Choose the Stargate peripheral, or use automatic detection.
+- For each monitor role, press Enter for automatic discovery or enter a monitor number (for example, `10` becomes `monitor_10`).
+
+These settings are stored locally in `sg_config.lua`. Existing options are preserved, while choices made in the wizard are updated. Bookmarks in `sg_bookmarks.lua` are also local and are not downloaded. HTTP must be enabled in the CC:Tweaked server configuration.
 
 In the ComputerCraft shell:
 
@@ -171,10 +184,23 @@ Das Programm unterstützt keine Pegasus-Gates. Beim ersten Start wird `sg_config
 Zum Installieren oder Aktualisieren direkt von GitHub diesen Befehl in der ComputerCraft-Shell ausführen:
 
 ```text
-wget run https://github.com/HoodyBooti/L-S-Gate-Control/releases/download/3.0/install.lua
+wget run https://raw.githubusercontent.com/HoodyBooti/L-S-Gate-Control/refs/heads/main/install.lua
 ```
 
-Das Installationsprogramm lädt `sgcontrol.lua` und `sg_language.lua` herunter und bietet anschliessend die Auswahl der Oberflächensprache, Energieeinheit und des Stargate-Peripherals an. Die Energieanzeige kann EU oder FE verwenden (1 EU = 4 FE). Für jede der drei Monitor-Rollen kann Enter für die automatische Erkennung gedrückt oder eine Monitor-Nummer eingegeben werden (zum Beispiel wird `10` zu `monitor_10`). Andere Konfigurationswerte bleiben erhalten. HTTP muss in der CC:Tweaked-Serverkonfiguration aktiviert sein.
+### Programmversion auswählen
+
+Das Installationsprogramm wird immer aus dem `main`-Zweig des Repositorys geladen; es ist ein gemeinsames Bootstrap-Programm und nicht an eine Programmversion gebunden. Beim Start wird die Programmquelle ausgewählt: Standardmässig wird das neueste GitHub-Release verwendet. Alternativ kann ein bestimmter Release-Tag oder ein Zweigname (zum Beispiel `main` oder `dev`) eingegeben werden. Bei einem Release werden die dort angehängten Dateien heruntergeladen, bei einem Zweig die aktuellen Dateien direkt aus diesem Zweig. Diese Auswahl bestimmt, welche Versionen von `sgcontrol.lua` und `sg_language.lua` installiert werden.
+
+### Installer-Konfiguration
+
+Nach der Auswahl der Programmquelle lassen sich die Einstellungen für diesen Computer festlegen:
+
+- Oberflächensprache auswählen.
+- Energieanzeige in EU oder FE auswählen (1 EU = 4 FE).
+- Stargate-Peripheral auswählen oder automatische Erkennung verwenden.
+- Für jede Monitor-Rolle Enter zur automatischen Erkennung drücken oder eine Monitor-Nummer eingeben (zum Beispiel wird `10` zu `monitor_10`).
+
+Diese Einstellungen werden lokal in `sg_config.lua` gespeichert. Bestehende Optionen bleiben erhalten; die im Assistenten gewählten Werte werden aktualisiert. Lesezeichen in `sg_bookmarks.lua` sind ebenfalls lokal und werden nicht heruntergeladen. HTTP muss in der CC:Tweaked-Serverkonfiguration aktiviert sein.
 
 In der ComputerCraft-Shell:
 

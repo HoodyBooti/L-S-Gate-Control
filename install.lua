@@ -1,9 +1,24 @@
-local BASE_URL = "https://raw.githubusercontent.com/HoodyBooti/L-S-Gate-Control/refs/heads/main/"
+local REPOSITORY_URL = "https://github.com/HoodyBooti/L-S-Gate-Control"
+local RELEASES_URL = REPOSITORY_URL .. "/releases"
+local RAW_URL = "https://raw.githubusercontent.com/HoodyBooti/L-S-Gate-Control/refs/heads/"
 local PROGRAM_FILES = { "sg_language.lua", "sgcontrol.lua" }
 local CONFIG_FILE = "sg_config.lua"
+local BASE_URL
 
 local function stop(message)
   printError(message)
+end
+
+local function validRef(ref)
+  if type(ref) ~= "string" or ref == "" or ref:sub(1, 1) == "/" or ref:sub(-1) == "/" or ref:find("//", 1, true) then
+    return false
+  end
+  for segment in ref:gmatch("[^/]+") do
+    if segment == "." or segment == ".." or not segment:match("^[%w_%-][%w%._%-]*$") then
+      return false
+    end
+  end
+  return true
 end
 
 if not http or not http.get then
@@ -109,8 +124,45 @@ local function chooseMonitor(role, used)
   end
 end
 
+local function readRef(prompt, default)
+  while true do
+    write(prompt .. " [" .. default .. "]: ")
+    local ref = read()
+    if ref == "" then ref = default end
+    if validRef(ref) then return ref end
+    print("Enter a valid release tag or branch name.")
+  end
+end
+
 print("Lantea Stargate Control installer")
-print("Downloading the latest program files...")
+print("")
+print("Choose program source: 1 = Latest release, 2 = Release tag, 3 = Development branch")
+local sourceChoice = choose("Source", { "latest release", "release tag", "branch" }, 1, false)
+local sourceDescription
+if sourceChoice == 1 then
+  BASE_URL = RELEASES_URL .. "/latest/download/"
+  sourceDescription = "latest release"
+elseif sourceChoice == 2 then
+  write("Release tag (Enter = latest release): ")
+  local tag = read()
+  if tag == "" then
+    BASE_URL = RELEASES_URL .. "/latest/download/"
+    sourceDescription = "latest release"
+  elseif validRef(tag) then
+    BASE_URL = RELEASES_URL .. "/download/" .. tag .. "/"
+    sourceDescription = "release " .. tag
+  else
+    stop("Invalid release tag.")
+    return
+  end
+else
+  local branch = readRef("Branch name", "main")
+  BASE_URL = RAW_URL .. branch .. "/"
+  sourceDescription = "branch " .. branch
+end
+
+print("")
+print("Downloading program files from " .. sourceDescription .. "...")
 
 for _, path in ipairs(PROGRAM_FILES) do
   local ok, err = downloadTo(path)
