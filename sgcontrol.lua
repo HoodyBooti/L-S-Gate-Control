@@ -1358,16 +1358,16 @@ local function chevGeometry(PW, PH, P, ox)
   local cx, cy = ox + (P - 1) / 2, (P - 1) / 2
   local th = math.max(3, math.floor(R * 0.17 + 0.5))        -- Hoehe eines Chevrons
   local tw = math.max(2, math.floor(th * 0.75 + 0.5))        -- halbe Breite
-  local chevGap = 3
-  local bandOut = R - th - 0.5 - chevGap
+  local bandOut = R - 0.5
   local bandIn = bandOut - math.max(2, math.floor(R * 0.22 + 0.5))
 
   local base = {}
   local outerRim = {}
+  local chevMask = {}
   for i = 1, PW * PH do base[i] = colors.black end
   g = {
     cx = cx, cy = cy, R = R, bandIn = bandIn, base = base,
-    chev = {}, outerRim = outerRim, ix = {}, iy = {}, id = {},
+    chev = {}, chevMask = chevMask, outerRim = outerRim, ix = {}, iy = {}, id = {},
   }
 
   for y = 0, P - 1 do
@@ -1392,7 +1392,7 @@ local function chevGeometry(PW, PH, P, ox)
     local a = math.rad(CHEV_ANGLE[i])
     local rx, ry = math.sin(a), -math.cos(a)
     local tx, ty = math.cos(a), math.sin(a)
-    local px, py = cx + rx * (R - 0.5), cy + ry * (R - 0.5)
+    local px, py = cx + rx * bandOut, cy + ry * bandOut
     local body = {}
     local ext = th + tw + 1
     for y = math.floor(py - ext), math.ceil(py + ext) do
@@ -1405,7 +1405,10 @@ local function chevGeometry(PW, PH, P, ox)
             local t = v / th
             local bodyHalf = tw * (1 - t)
             local idx = y * PW + x + 1
-            if math.abs(u) <= bodyHalf + 0.5 then body[#body + 1] = idx end
+            if math.abs(u) <= bodyHalf + 0.5 then
+              body[#body + 1] = idx
+              chevMask[idx] = true
+            end
           end
         end
       end
@@ -1511,7 +1514,9 @@ local function drawChevronsRaw()
     end
   end
 
-  for _, idx in ipairs(g.outerRim) do cv[idx] = colors.lightBlue end
+  for _, idx in ipairs(g.outerRim) do
+    if not g.chevMask[idx] then cv[idx] = colors.lightBlue end
+  end
 
   -- Pixel -> Teletext-Zeichen
   for row = 1, ch do
