@@ -1362,10 +1362,11 @@ local function chevGeometry(PW, PH, P, ox)
   local bandIn = bandOut - math.max(2, math.floor(R * 0.22 + 0.5))
 
   local base = {}
+  local outerRim = {}
   for i = 1, PW * PH do base[i] = colors.black end
   g = {
     cx = cx, cy = cy, R = R, bandIn = bandIn, base = base,
-    chev = {}, chevFace = {}, chevMark = {}, ix = {}, iy = {}, id = {},
+    chev = {}, chevFace = {}, outerRim = outerRim, ix = {}, iy = {}, id = {},
   }
 
   for y = 0, P - 1 do
@@ -1374,7 +1375,12 @@ local function chevGeometry(PW, PH, P, ox)
       local d = math.sqrt(dx * dx + dy * dy)
       local idx = y * PW + x + 1
       if d <= bandOut and d >= bandIn then
-        base[idx] = (d >= bandOut - 1.2 or d <= bandIn + 1.2) and colors.lightBlue or colors.blue
+        if d >= bandOut - 1.2 then
+          base[idx] = colors.lightBlue
+          outerRim[#outerRim + 1] = idx
+        else
+          base[idx] = d <= bandIn + 1.2 and colors.lightBlue or colors.blue
+        end
       elseif d < bandIn - 0.5 then
         g.ix[#g.ix + 1], g.iy[#g.iy + 1], g.id[#g.id + 1] = x, y, d
       end
@@ -1386,7 +1392,7 @@ local function chevGeometry(PW, PH, P, ox)
     local rx, ry = math.sin(a), -math.cos(a)
     local tx, ty = math.cos(a), math.sin(a)
     local px, py = cx + rx * (R - 0.5), cy + ry * (R - 0.5)
-    local body, face, mark = {}, {}, {}
+    local body, face = {}, {}
     local ext = th + tw + 1
     for y = math.floor(py - ext), math.ceil(py + ext) do
       for x = math.floor(px - ext), math.ceil(px + ext) do
@@ -1404,18 +1410,12 @@ local function chevGeometry(PW, PH, P, ox)
               if v >= 1 and v <= th - 1 and math.abs(u) <= faceHalf + 0.35 then
                 face[#face + 1] = idx
               end
-
-              local markV = th * 0.55
-              if v >= 1 and v <= th - 1 and math.abs(v - markV) <= 0.55 and
-                math.abs(u) <= faceHalf + 0.35 then
-                mark[#mark + 1] = idx
-              end
             end
           end
         end
       end
     end
-    g.chev[i], g.chevFace[i], g.chevMark[i] = body, face, mark
+    g.chev[i], g.chevFace[i] = body, face
   end
 
   chevGeo[key] = g
@@ -1477,10 +1477,8 @@ local function drawChevronsRaw()
     local c = slotColor[i]
     local shellColor = c == colors.red and colors.brown or (c == colors.lightBlue and colors.blue or colors.gray)
     local faceColor = c == colors.gray and colors.blue or c
-    local markColor = c == colors.red and colors.cyan or colors.lightBlue
     for _, idx in ipairs(g.chev[i]) do cv[idx] = shellColor end
     for _, idx in ipairs(g.chevFace[i]) do cv[idx] = faceColor end
-    for _, idx in ipairs(g.chevMark[i]) do cv[idx] = markColor end
   end
 
   if S.wormhole then
@@ -1519,6 +1517,8 @@ local function drawChevronsRaw()
       end
     end
   end
+
+  for _, idx in ipairs(g.outerRim) do cv[idx] = colors.lightBlue end
 
   -- Pixel -> Teletext-Zeichen
   for row = 1, ch do
