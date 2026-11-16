@@ -199,6 +199,8 @@ local function num(n)
   return s
 end
 
+local MAX_GATE_ENERGY_EU = 8192000
+
 -- Symbole des Gates (Nummer -> Name). DHD-Tasten = alle Nummern > 0 mit bekanntem Namen.
 local symName, glyphs = {}, {}
 for n = 0, 60 do
@@ -1257,12 +1259,25 @@ local function drawStatus()
   line(T("LABEL_CHEVRONS"), S.lockedCount .. "/9")
   if not compact then
     local energy = "?"
+    local fill
     if S.energy ~= nil then
+      local energyEU = tonumber(S.energy) or 0
+      fill = math.max(0, math.min(1, energyEU / MAX_GATE_ENERGY_EU))
+      local percent = math.floor(fill * 100 + 0.5)
       energy = cfg.energyInFE == true
-        and (num((tonumber(S.energy) or 0) * 4) .. " FE")
-        or (num(S.energy) .. " EU")
+        and (percent .. "% " .. num(energyEU * 4) .. " FE")
+        or (percent .. "% " .. num(energyEU) .. " EU")
     end
     line(T("LABEL_ENERGY"), energy)
+    if fill ~= nil and y <= h then
+      local barWidth = math.max(0, w - 2)
+      if barWidth > 0 then
+        fillRect(m, 2, y, w - 1, y, colors.gray)
+        local filledWidth = math.floor(barWidth * fill + 0.5)
+        if filledWidth > 0 then fillRect(m, 2, y, 1 + filledWidth, y, colors.lime) end
+      end
+      y = y + 1
+    end
   end
   local iris = irisText(S.iris)
   if S.material and not compact then iris = iris .. " (" .. tostring(S.material) .. ")" end

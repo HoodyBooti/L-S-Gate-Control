@@ -53,7 +53,7 @@ The program assigns connected monitors to the `control`, `status`, and `chevron`
 | Role | Contents | |
 | --- | --- | --- |
 | `controlMonitor` | Touch DHD, separate bookmark menu, iris and dialing controls | ![English dialing screen](pictures/EN_dial.png) ![English authorization screen](pictures/EN_dial_authorization.png) ![English bookmarks](pictures/EN_dial_bookmarks-full.png) |
-| `statusMonitor` | Connection status, address, elapsed time, energy, iris, and event log | ![English status screen](pictures/EN_status.png) |
+| `statusMonitor` | Connection status, address, elapsed time, energy with fill percentage and bar (100% = 8,192,000 EU), iris, and event log | ![English status screen](pictures/EN_status.png) |
 | `chevronMonitor` | Stargate ring with chevron progress and an animated wormhole | ![Animated English chevron display](pictures/EN_chevron_in-dial.gif) | 
 
 For more screenshots in English and German, see the [picture gallery](pictures/readme.md).
@@ -206,7 +206,7 @@ Das Programm weist angeschlossene Monitore in sortierter Namensreihenfolge den R
 | Rolle | Inhalt | |
 | --- | --- | --- |
 | `controlMonitor` | Touch-DHD, separates Lesezeichenmenü, Iris- und Wahlsteürung | ![Wahlmonitor](pictures/DE_dial.png) ![Wahlmonitor](pictures/DE_dial.png) |
-| `statusMonitor` | Verbindungszustand, Adresse, Laufzeit, Energie, Iris und Ereignisprotokoll | ![Statusbildschirm](pictures/DE_status.png) |
+| `statusMonitor` | Verbindungszustand, Adresse, Laufzeit, Energie mit Füllstand in Prozent und Balken (100 % = 8.192.000 EU), Iris und Ereignisprotokoll | ![Statusbildschirm](pictures/DE_status.png) |
 | `chevronMonitor` | Stargate-Ring mit Chevron-Fortschritt und animiertem Wurmloch | ![Chevronbildschirm](pictures/DE_chevron.png) | 
 
 Falls nur ein Monitor angeschlossen ist, zeigt er das Wahlmenü. Für eine feste Zuordnung zürst `<programmname> identify` ausführen und danach die Namen in der Konfiguration eintragen.
