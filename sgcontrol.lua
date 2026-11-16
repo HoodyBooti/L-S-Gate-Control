@@ -1461,7 +1461,7 @@ local function drawChevronsRaw()
 
   -- Slot-Zustand: Verriegelungsnummer k -> Slot (9 ist immer der letzte)
   local slotColor = {}
-  for i = 1, 9 do slotColor[i] = colors.gray end
+  for i = 1, 9 do slotColor[i] = colors.cyan end
   -- Bei eingehender Wahl ist die Gesamtzahl unbekannt: dann 1..k der Reihe nach,
   -- erst bei offenem Wurmloch rutscht das letzte Chevron auf Slot 9.
   local totalKnown = (syms ~= nil) or (S.wormhole ~= nil)
